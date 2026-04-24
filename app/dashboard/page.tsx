@@ -15,7 +15,7 @@ export default async function DashboardPage() {
   //const issues = await getIssues()
 
   // use API route case
-  const res = await fetch(`${process.env.DEV_ENV}/api/issues`)
+  const res = await fetch(`/api/issues`)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
