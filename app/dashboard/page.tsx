@@ -6,24 +6,13 @@ import Badge from '../components/ui/Badge'
 import { formatRelativeTime } from '@/lib/utils'
 import { Priority, Status } from '@/lib/types'
 import { ISSUE_STATUS, ISSUE_PRIORITY } from '@/db/schema'
-import { headers } from 'next/headers'
 
 export const dynamic = 'force-dynamic'
 
 export default async function DashboardPage() {
   await getCurrentUser()
   // use server action case
-  //const issues = await getIssues()
-
-  // use API route case
-  const headersList = await headers()
-  const host = headersList.get('host')
-  const protocol = headersList.get('x-forwarded-proto') || 'http'
-  const res = await fetch(`${protocol}://${host}/api/issues`)
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-  const issues = await res.json()
+  const issues = await getIssues()
 
   return (
     <div>
